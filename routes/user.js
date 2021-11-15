@@ -6,8 +6,8 @@ const router = express.Router();
 const userCtrl = require('../controllers/user');
 
 //Création des routes
-router.post('/signup', userCtrl.signup);
-router.post('/login', userCtrl.login);
+router.post('/signup', userCtrl.signup); //Route pour créer un compte
+router.post('/login', userCtrl.login); //Route pour se connecter au compte
 
 //Exportation des routes
 module.exports = router;
