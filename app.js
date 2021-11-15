@@ -27,5 +27,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
+app.use('/api/auth', userRoutes);
+
 //Exportation de app
 module.exports = app;

@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
     .then(hash => { //Création de l'utilisateur
         const user = new User({
             email: req.body.email,
-            password: hash
+            password: hash //Hash le password au moment de la création
         });
         user.save() //Sauvegarde de l'utilisateur vers la BDD
         .then(() => res.status(201).json({ message: 'Utilisateur créé avec succès' }))
