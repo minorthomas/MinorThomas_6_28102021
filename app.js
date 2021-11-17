@@ -2,10 +2,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// const path = require('path');
+const path = require('path');
 
 //Importation des routes
-const sauceRoutes = require('./routes/sauce');
+const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
 //Connexion à la bdd
@@ -25,9 +25,13 @@ app.use((req, res, next) => {
     next();
   });
 
+//Parse le body en json
 app.use(bodyParser.json());
 
+//Ajout des routes
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
+app.use('/api/sauces', saucesRoutes);
 
 //Exportation de app
 module.exports = app;
