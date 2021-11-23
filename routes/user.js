@@ -5,8 +5,11 @@ const router = express.Router();
 //Importation du controllers 'user.js'
 const userCtrl = require('../controllers/user');
 
+//Importation du middleware password qui permet de test si le password est valide, sinon renvoi un message d'erreur
+const verifyPassword = require('../middleware/password');
+
 //Création des routes
-router.post('/signup', userCtrl.signup); //Route pour créer un compte
+router.post('/signup', verifyPassword, userCtrl.signup); //Route pour créer un compte, test le password
 router.post('/login', userCtrl.login); //Route pour se connecter au compte
 
 //Exportation des routes
