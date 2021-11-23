@@ -1,19 +1,23 @@
 //Importation des packages
 const express = require('express');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //Permet la connexion à la BDD mongodb
 const bodyParser = require('body-parser');
 const path = require('path');
 
 //Importation des routes
-const saucesRoutes = require('./routes/sauces');
-const userRoutes = require('./routes/user');
+const saucesRoutes = require('./routes/sauces'); //Routes des sauces
+const userRoutes = require('./routes/user'); //Routes des utilisateurs
+
+require('dotenv').config(); //Importation du packages dotenv qui permet de protéger les informations de connexion vers la BDD
+const URI = process.env.DB_URI; //Variable qui récupère "DB_URI" dans le fichier .env
 
 //Connexion à la bdd
-mongoose.connect('mongodb+srv://totoske:piiquante@cluster0.plpwa.mongodb.net/piiquante?retryWrites=true&w=majority',
-    { useNewUrlParser: true,
-      useUnifiedTopology: true })
-      .then(() => console.log('Connexion à la BDD réussie.'))
-      .catch(() => console.log('Connexion à la BDD échouée.'));
+mongoose.connect(URI, { 
+      useNewUrlParser: true,
+      useUnifiedTopology: true 
+    })
+    .then(() => console.log('Connexion à la BDD réussie.'))
+    .catch(() => console.log('Connexion à la BDD échouée.'));
 
 const app = express();
 
