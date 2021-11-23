@@ -4,6 +4,9 @@ const mongoose = require('mongoose'); //Permet la connexion à la BDD mongodb
 const bodyParser = require('body-parser');
 const path = require('path');
 
+//Importation packages de sécurité
+const helmet = require('helmet'); //Permet de sécurisé les en-tête http de notre application express
+
 //Importation des routes
 const saucesRoutes = require('./routes/sauces'); //Routes des sauces
 const userRoutes = require('./routes/user'); //Routes des utilisateurs
@@ -29,8 +32,10 @@ app.use((req, res, next) => {
     next();
   });
 
-//Parse le body en json
-app.use(bodyParser.json());
+
+app.use(bodyParser.json());//Parse le body en objet json utilisable
+
+app.use(helmet()); //Permet de sécurisé les en-tête http de notre application express
 
 //Ajout des routes
 app.use('/images', express.static(path.join(__dirname, 'images')));
