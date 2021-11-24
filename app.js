@@ -38,9 +38,9 @@ app.use(bodyParser.json());//Parse le body en objet json utilisable
 app.use(helmet()); //Permet de sécurisé les en-tête http de notre application express
 
 //Ajout des routes
-app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/api/auth', userRoutes);
-app.use('/api/sauces', saucesRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images'))); //Ajout de la route images et enregistre l'image dans le dossier "images"
+app.use('/api/auth', userRoutes); //Route vers l'authentification login et signup
+app.use('/api/sauces', saucesRoutes); //Route vers les sauces
 
 //Exportation de app
 module.exports = app;
