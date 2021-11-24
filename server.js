@@ -1,5 +1,5 @@
-const http = require('http'); //import http
-const app = require('./app'); //import app.js
+const http = require('http'); //import serveur http (https avec certif ssl)
+const app = require('./app'); //import du fichier app.js
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
