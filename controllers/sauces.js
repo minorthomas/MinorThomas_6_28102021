@@ -3,7 +3,6 @@ const fs = require('fs'); //Signifie 'file-system' ajoute des fonctions pour mod
  
 const Sauce = require('../models/Sauce'); //Importation du modéle de sauce
 
-
 //Exportations des controllers
 exports.createSauce = (req, res, next) => { //Permet de faire la logique de création de sauce
     const sauceObject = JSON.parse(req.body.sauce); //Parse le corps de la requête sauce en objet js utilisable

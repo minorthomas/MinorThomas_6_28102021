@@ -4,6 +4,8 @@ const mongoose = require('mongoose'); //Permet la connexion à la BDD mongodb
 const bodyParser = require('body-parser'); //Analyse les corps des requêtes et ajoute la propriété "req.body"
 const path = require('path'); //Permet de travailler avec les chemins des fichiers
 
+const session = require('express-session');//Permet d'éviter les attaques XSS dans les cookies
+
 //Importation packages de sécurité
 const helmet = require('helmet'); //Permet de sécurisé les en-tête http de notre application express
 
@@ -13,7 +15,7 @@ const userRoutes = require('./routes/user'); //Routes des utilisateurs
 
 require('dotenv').config(); //Importation du packages dotenv qui permet de protéger les informations de connexion vers la BDD
 
-//Variable qui contient le link pour la connexion à la BDD
+//Constante qui contient le link pour la connexion à la BDD
 const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`; 
 
 //Connexion à la bdd
@@ -25,6 +27,15 @@ mongoose.connect(URI, { //URI est la constante au dessus qui récupère "DB_URI"
     .catch(() => console.log('Connexion à la BDD échouée.')); //Renvoi un message si la connexion à échouée
 
 const app = express();
+
+app.use(session({ //Evite les attaques XSS dans les cookies
+    secret: "k5Zurj4",
+    cookie: {
+      httpOnly: true,
+      secure: true
+    }
+  })
+);
 
 //Ajout des privilèges
 app.use((req, res, next) => {
