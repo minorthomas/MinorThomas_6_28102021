@@ -28,7 +28,7 @@ exports.modifySauce = (req, res, next) => {
                 const filename = sauce.imageUrl.split('/images/')[1]; //Supprime l'image 1 à partir de l'image choisie (donc suppr l'image en question)
                 fs.unlink(`images/${filename}`, () => { //Unlink l'image de la sauce
                     // une fois que l'ancienne image est supprimée dans le dossier /image, on peut mettre à jour le reste
-                    const sauceObject = { //Modifie l'image de la sauce
+                    const sauceObject = {
                         ...JSON.parse(req.body.sauce),
                         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
                     }

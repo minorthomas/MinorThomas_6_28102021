@@ -11,8 +11,9 @@ const storage = multer.diskStorage({ //Enregistre l'images dans le dossier 'imag
     callback(null, 'images');
   },
   filename: (req, file, callback) => { 
-    const name = file.originalname.split(' ').join('_'); //Remplace les espaces par des tirets
+    let name = file.originalname.split(' ').join('_'); //R/emplace les espaces par des tirets
     const extension = MIME_TYPES[file.mimetype]; //Vérifie si l'image à la bonne extension ci dessus
+    name = name.replace("." + extension, "_");
     callback(null, name + Date.now() + '.' + extension); //Rajoute au nom, la date pour l'authenticité et éviter les doubles images + le . et l'extension
   }
 });

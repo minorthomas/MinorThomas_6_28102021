@@ -12,7 +12,7 @@ const saucesRoutes = require('./routes/sauces'); //Routes des sauces
 const userRoutes = require('./routes/user'); //Routes des utilisateurs
 
 require('dotenv').config(); //Importation du packages dotenv qui permet de protéger les informations de connexion vers la BDD
-const URI = process.env.DB_URI; //Variable qui récupère "DB_URI" dans le fichier .env
+const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority"`; //Variable qui récupère "DB_URI" dans le fichier .env
 
 //Connexion à la bdd
 mongoose.connect(URI, { //URI est la constante au dessus qui récupère "DB_URI" dans le fichier .env 
@@ -26,7 +26,7 @@ const app = express();
 
 //Ajout des privilèges
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); //En-tête qui permet de set les permissions pour d'accèder au ressource
+    res.setHeader('Access-Control-Allow-Origin', '*'); //En-tête qui permet de set les permissions pour accèder aux ressources (ip local)
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'); //En-tête qui permet de set les en-tête utilisable
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); //En-tête qui permet de set les méthodes http utilisable
     next();
