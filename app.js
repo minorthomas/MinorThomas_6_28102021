@@ -12,12 +12,14 @@ const saucesRoutes = require('./routes/sauces'); //Routes des sauces
 const userRoutes = require('./routes/user'); //Routes des utilisateurs
 
 require('dotenv').config(); //Importation du packages dotenv qui permet de protéger les informations de connexion vers la BDD
-const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority"`; //Variable qui récupère "DB_URI" dans le fichier .env
+
+//Variable qui contient le link pour la connexion à la BDD
+const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`; 
 
 //Connexion à la bdd
 mongoose.connect(URI, { //URI est la constante au dessus qui récupère "DB_URI" dans le fichier .env 
       useNewUrlParser: true,
-      useUnifiedTopology: true 
+      useUnifiedTopology: true
     })
     .then(() => console.log('Connexion à la BDD réussie.')) //Renvoi un message si la connexion est réussie
     .catch(() => console.log('Connexion à la BDD échouée.')); //Renvoi un message si la connexion à échouée
@@ -26,7 +28,7 @@ const app = express();
 
 //Ajout des privilèges
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); //En-tête qui permet de set les permissions pour accèder aux ressources (ip local)
+    res.setHeader('Access-Control-Allow-Origin', process.env.AUTHORIZED_ORIGIN); //En-tête qui permet de set les permissions pour accèder aux ressources (ip local)
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'); //En-tête qui permet de set les en-tête utilisable
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); //En-tête qui permet de set les méthodes http utilisable
     next();
