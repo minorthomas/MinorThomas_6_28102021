@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());//Parse le body en objet json utilisable
 
-app.use(helmet()); //Permet de sécurisé les en-tête http de notre application express
+app.use(helmet()); //Sécurise les en-tête http de notre application express
 
 //Ajout des routes
 app.use('/images', express.static(path.join(__dirname, 'images'))); //Ajout de la route images et enregistre l'image dans le dossier "images"
