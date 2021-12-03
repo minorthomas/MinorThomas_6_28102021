@@ -28,15 +28,6 @@ mongoose.connect(URI, { //URI est la constante au dessus qui récupère "DB_URI"
 
 const app = express();
 
-app.use(session({ //Evite les attaques XSS dans les cookies
-    secret: "k5Zurj4",
-    cookie: {
-      httpOnly: true,
-      secure: true
-    }
-  })
-);
-
 //Ajout des privilèges
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', process.env.AUTHORIZED_ORIGIN); //En-tête qui permet de set les permissions pour accèder aux ressources (ip local)
